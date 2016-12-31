@@ -1,0 +1,9 @@
+{
+	"host": "a3riiqm5a27d7f.iot.us-east-1.amazonaws.com",
+	"port": 8883,
+	"clientId": "First-BBQ-Contoller",
+	"thingName": "First-BBQ-Contoller",
+	"caCert": "root-CA.crt",
+	"clientCert": "631b77f641-certificate.pem.crt",
+	"privateKey": "631b77f641-private.pem.key"
+}
