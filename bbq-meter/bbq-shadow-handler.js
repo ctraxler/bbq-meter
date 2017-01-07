@@ -82,9 +82,6 @@ const isUndefined = require('../common/lib/is-undefined');
 
       events.EventEmitter.call(this);
 
-      this.emit('myEvent', thingName);
-
-      console.log('Emitted my first event, I' + '\'' + 'm so proud.');
 
       that = this; 
       //
@@ -184,8 +181,6 @@ const isUndefined = require('../common/lib/is-undefined');
                }
             });
       }
-
-//      deviceConnect();
 
       function handleStatus(thingName, stat, clientToken, stateObject) {
          var expectedClientToken = stack.pop();

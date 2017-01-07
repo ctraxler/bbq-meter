@@ -58,6 +58,16 @@ function publishControllerReportedState(jsonControllerState) {
 
 }
 
+function handleExit(){
+	console.log('');
+	console.log('Disconnecting any connections and existing...');
+	myBbqContollerComm.disconnect();
+	console.log('Exiting now...');
+	process.exit();
+}
+
+// Catch CTL+C 
+process.on('SIGINT', handleExit());
 
 console.log(JSON.stringify(args)+ '\n'); 
 
