@@ -96,11 +96,11 @@ const isUndefined = require('../common/lib/is-undefined');
       function genericOperation(operation, state) {
          var clientToken = thingShadows[operation](thingName, state);
 
-         console.log('Performing genericOperation...');
-         console.log('Performing on thing [' + thingName.toString() + ']');
-         console.log('Performing Operation ' + operation);
-         console.log('Using state ' + state );
-         console.log('Value of clientToken is ' + clientToken.toString());
+//         console.log('Performing genericOperation...');
+//         console.log('Performing on thing [' + thingName.toString() + ']');
+//         console.log('Performing Operation ' + operation);
+//         console.log('Using state ' + state );
+//         console.log('Value of clientToken is ' + clientToken.toString());
 
          if (clientToken === null) {
             //
@@ -190,13 +190,6 @@ const isUndefined = require('../common/lib/is-undefined');
          } else {
             console.log('(status) client token mismtach on: ' + thingName);
          }
-
-         console.log('thing stateObject is ' + JSON.stringify(stateObject));
-
-         /*
-         *  Todo, see if we can correlate rejection status to an update we issued and manage the error
-         */
-
       }
 
       function handleDelta(thingName, stateObject) {
@@ -239,9 +232,6 @@ const isUndefined = require('../common/lib/is-undefined');
             console.log('(timeout) client token mismtach on: ' + thingName);
          }
 
-         if (args.testMode === 2) {
-//            genericOperation('update', generateStubReportedState());
-         }
       }
 
       thingShadows.on('connect', function() {

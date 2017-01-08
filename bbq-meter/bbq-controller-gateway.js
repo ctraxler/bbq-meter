@@ -1,17 +1,3 @@
-/*
- * Copyright 2017 Craig Traxler. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License.
- * A copy of the License is located at
- *
- *  http://aws.amazon.com/apache2.0
- *
- * or in the "license" file accompanying this file. This file is distributed
- * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
- * express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
- */
 
 //node.js deps
 
@@ -33,61 +19,58 @@ const isUndefined = require('../common/lib/is-undefined');
 
 function main(args) {
 
-/* 	
-*	Where the magic happens
-*/
 
-function handleStateChangeRequest (thingName, deltaObject) {
-	console.log('Delta Values for ' + thingName + ' ' + JSON.stringify(deltaObject));
-}
+	function handleStateChangeRequest (thingName, deltaObject) {
+		console.log('Delta Values for ' + thingName + ' ' + JSON.stringify(deltaObject));
+	}
 
-function publishControllerReportedState(jsonControllerState) {
+	function publishControllerReportedState(jsonControllerState) {
 
-	var jsonIOTState = { 
-			bbq: jsonControllerState.bbq,
-		    upper_level: jsonControllerState.ul,
-		    lower_level: jsonControllerState.ll,
-		    fan: jsonControllerState.fl,
-		    upper_alarm: 320,
-		    lower_alarm: 150,
-		    fan_target: 40,
-		    bbq_mode: "auto"}
+		var jsonIOTState = { 
+				bbq: jsonControllerState.bbq,
+			    upper_level: jsonControllerState.ul,
+			    lower_level: jsonControllerState.ll,
+			    fan: jsonControllerState.fl,
+			    upper_alarm: 320,
+			    lower_alarm: 150,
+			    fan_target: 40,
+			    bbq_mode: "auto"}
 
 
-	myThingShadowHandler.updateState(jsonIOTState)
+		myThingShadowHandler.updateState(jsonIOTState)
 
-}
+	}
 
-function handleExit(){
-	console.log('');
-	console.log('Disconnecting any connections and existing...');
-	myBbqContollerComm.disconnect();
-	console.log('Exiting now...');
-	process.exit();
-}
+	function handleExit(){
+		console.log('');
+		console.log('Disconnecting any connections and existing...');
+		myBbqContollerComm.disconnect();
+		console.log('Exiting now...');
+		process.exit();
+	}
 
 // Catch CTL+C 
-process.on('SIGINT', handleExit());
+	process.on('SIGINT', handleExit);
 
-console.log(JSON.stringify(args)+ '\n'); 
+	console.log(JSON.stringify(args)+ '\n'); 
 
-const myThingShadowHandler = thingShadowHandler(args); 
-const myBbqControllerComm = bbqControllerComm();
+	const myThingShadowHandler = thingShadowHandler(args); 
+	const myBbqControllerComm = bbqControllerComm();
 
-console.log(JSON.stringify(Object.getOwnPropertyNames(thingShadowHandler)));
+	console.log(JSON.stringify(Object.getOwnPropertyNames(thingShadowHandler)));
 
-console.log(JSON.stringify(thingShadowHandler));
+	console.log(JSON.stringify(thingShadowHandler));
 
-myThingShadowHandler.on('delta', function (thingName, deltaObject) {
-	handleStateChangeRequest(thingName, deltaObject); 
-})
+	myThingShadowHandler.on('delta', function (thingName, deltaObject) {
+		handleStateChangeRequest(thingName, deltaObject); 
+	})
 
-myBbqControllerComm.on('stateUpdate', function(jsonState) {
-	publishControllerReportedState(jsonState); 	
-})
+	myBbqControllerComm.on('stateUpdate', function(jsonState) {
+		publishControllerReportedState(jsonState); 	
+	})
 
 
-myThingShadowHandler.deviceConnect();
+	myThingShadowHandler.deviceConnect();
 
 
 }
