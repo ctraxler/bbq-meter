@@ -73,7 +73,6 @@ const isUndefined = require('../common/lib/is-undefined');
 
       // commment out override of the device name
       const thingName = args.thingName;
-//      const thingName = 'First-BBQ-Contoller';
 
       const relevantDeltas = ['upper_alarm', 'lower_alarm', 'fan_target', 'bbq_mode'];
 
@@ -83,7 +82,7 @@ const isUndefined = require('../common/lib/is-undefined');
       events.EventEmitter.call(this);
 
 
-      that = this; 
+      var that = this; 
       //
       // For convenience, use a stack to keep track of the current client 
       // token; in this example app, this should never reach a depth of more 

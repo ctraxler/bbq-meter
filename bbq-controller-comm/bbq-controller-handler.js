@@ -30,11 +30,22 @@ function processControllerMessages(){
   // }
   // var bleSerial = new BleUart('foo', uart);
 
+  // provide a send data function
+  this.send = function (jsonData) {
+    bleSerial.write(JSON.stringify(jsonData));
+  }
+
+  // expose a disconnect function
+  this.disconnect = function(){
+
+
+  }
+
   // this function gets called when new data is received from
   // the Bluetooth LE serial service:
   bleSerial.on('data', function(data){
     
-    console.log("Got new data from controller: " + String(data));
+    console.log("Received new data from controller: " + String(data));
     stringData = String(data); 
     jsonString = jsonString + stringData;
 

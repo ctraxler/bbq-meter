@@ -208,6 +208,10 @@ var BleUart = function (name, options) {
     self.connected = false;
   };
 
+  self.doDisconnect = function() {
+    peripheral.disconnect();
+  }
+
   // when the radio turns on, start scanning:
   noble.on('stateChange', scan);
   // if you discover a peripheral with the appropriate service, connect:
