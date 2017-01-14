@@ -209,7 +209,7 @@ var BleUart = function (name, options) {
   };
 
   self.doDisconnect = function() {
-    peripheral.disconnect();
+    self.peripheral.disconnect();
   }
 
   // when the radio turns on, start scanning:

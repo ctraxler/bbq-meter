@@ -37,7 +37,8 @@ function processControllerMessages(){
 
   // expose a disconnect function
   this.disconnect = function(){
-
+    
+    bleSerial.doDisconnect();
 
   }
 
@@ -45,7 +46,6 @@ function processControllerMessages(){
   // the Bluetooth LE serial service:
   bleSerial.on('data', function(data){
     
-    console.log("Received new data from controller: " + String(data));
     stringData = String(data); 
     jsonString = jsonString + stringData;
 
